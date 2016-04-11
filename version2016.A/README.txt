@@ -15,3 +15,10 @@ Additional "demoGame" Visual Studio project settings:
 		Add ..\engineSDL\headers
 	* References > Project > Solution
 		Add engineSDL as reference
+		
+		
+Doxygen:
+	To initialize doxygen
+		$ doxygen -g doxygen.config
+	To generate documentation
+		$ doxygen doxygen.config

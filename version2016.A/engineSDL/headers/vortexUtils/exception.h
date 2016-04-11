@@ -6,7 +6,7 @@
 namespace vortex {
 	class Exception : public std::exception {
 	protected:
-		std::string mText;
+		std::string mText; //!< Brief text describing this exception.
 	public:
 		/// Constructor
 		Exception(const char *msg) {
