@@ -1,12 +1,25 @@
+#pragma once
+
 #include <string>
 #include <exception>
 #include "vortexUtils\exception.h"
 
+// GNU
+#ifdef __GNUG__
+#define LOG_FUNC() { Logger::d(__FUNCTION__); } //!< Prints the pretty function signature.
+#else
+// WINDOWS
+#define LOG_FUNC() { Logger::d(__FUNCSIG__); } //!< Prints the pretty function signature.
+#endif
+
 namespace vortex {
+	/// Logs messages to std::cout
 	class Logger {
 	public:
 		//! Prints a debug text to std::cout
 		static void d(std::string msg);
+		//! Prints a warning text to std::cout
+		static void w(std::string msg);
 		//! Prints an exception as error to std::cout
 		static void e(std::exception &ex);
 		//! Prints an exception as error to std::cout

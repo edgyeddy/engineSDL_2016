@@ -84,13 +84,13 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ENGINESDL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-D_WIN32_WINNT=0x0501</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,15 +149,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\constants.cpp" />
     <ClCompile Include="src\gameMain.cpp" />
+    <ClCompile Include="src\IDisposableObject.cpp" />
     <ClCompile Include="src\logUtils\logger.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
+    <ClCompile Include="src\sceneManager.cpp" />
+    <ClCompile Include="src\vortexUtils\templateArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\constants.h" />
     <ClInclude Include="headers\gameMain.h" />
+    <ClInclude Include="headers\IDisposableObject.h" />
     <ClInclude Include="headers\localeUtils\translate.h" />
     <ClInclude Include="headers\logUtils\logger.h" />
+    <ClInclude Include="headers\Scene.h" />
+    <ClInclude Include="headers\sceneManager.h" />
     <ClInclude Include="headers\threadUtils\threadUtils.h" />
+    <ClInclude Include="headers\UserEventData.h" />
     <ClInclude Include="headers\vortexUtils\exception.h" />
+    <ClInclude Include="headers\vortexUtils\templateArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

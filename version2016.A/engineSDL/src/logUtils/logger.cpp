@@ -10,13 +10,16 @@ namespace vortex {
 		Logger::log(msg, "d");
 	}
 	void Logger::e(std::exception &ex) {
-		Logger::e("std::EXCEPTION: " + std::string(ex.what()));
+		Logger::log("std::EXCEPTION: " + std::string(ex.what()), "e");
 	}
 	void Logger::e(Exception &ex) {
-		Logger::e("vortex::EXCEPTION: " + ex.getText());
+		Logger::log("vortex::EXCEPTION: " + ex.getText(), "e");
 	}
 	void Logger::e(std::string msg) {
-		Logger::log(msg, "e");
+		Logger::log("ERROR: " + msg, "e");
+	}
+	void Logger::w(std::string msg) {
+		Logger::log("WARNING: " + msg, "w");
 	}
 	void Logger::log(std::string msg, std::string type) {
 		std::ostringstream oss;
