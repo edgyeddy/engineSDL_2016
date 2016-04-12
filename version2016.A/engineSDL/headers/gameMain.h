@@ -1,6 +1,8 @@
 #include "IDisposableObject.h"
 #include "constants.h"
 #include "sceneManager.h"
+#include "assetsManager.h"
+#include "textManager.h"
 #pragma once
 namespace vortex {
 	/// Single game main class. It is the entry point for our engine.
@@ -48,7 +50,20 @@ namespace vortex {
 		SDL_TimerID mTimerFPS; //!< Timer ID to the FPS timer (needed to cancel it).
 		SDL_Window* mWindow; //!< Pointer to the single window of this program
 		//@ADD-NEW-MANAGERS-HERE
+		AssetsManager *mAssetsManager;  //!< Pointer to the owned assets manager.
 		SceneManager *mSceneManager; //!< Pointer to the owned scene manager.
+		TextManager *mTextManager;  //!< Pointer to the owned text manager.
+	public:
+		//@ADD-NEW-MANAGERS-HERE
+		inline AssetsManager *getAssetsManager() {
+			return mAssetsManager;
+		} //!< Getter
+		inline TextManager *getTextManager() {
+			return mTextManager;
+		} //!< Getter
+		inline SceneManager *getSceneManager() {
+			return mSceneManager;
+		} //!< Getter
 	protected:
 		void _initialize() override;
 		void _dispose() override;

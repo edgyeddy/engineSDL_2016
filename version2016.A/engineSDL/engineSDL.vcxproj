@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\lib\x86;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ENGINESDL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_WIN32_WINNT=0x0501</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -149,22 +149,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\assetsManager.cpp" />
     <ClCompile Include="src\constants.cpp" />
     <ClCompile Include="src\gameMain.cpp" />
     <ClCompile Include="src\IDisposableObject.cpp" />
     <ClCompile Include="src\logUtils\logger.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\sceneManager.cpp" />
+    <ClCompile Include="src\textManager.cpp" />
     <ClCompile Include="src\vortexUtils\templateArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\assetsManager.h" />
+    <ClInclude Include="headers\color4.h" />
     <ClInclude Include="headers\constants.h" />
     <ClInclude Include="headers\gameMain.h" />
+    <ClInclude Include="headers\IDefaultDelegate.h" />
     <ClInclude Include="headers\IDisposableObject.h" />
     <ClInclude Include="headers\localeUtils\translate.h" />
     <ClInclude Include="headers\logUtils\logger.h" />
+    <ClInclude Include="headers\Rectangle.h" />
     <ClInclude Include="headers\Scene.h" />
     <ClInclude Include="headers\sceneManager.h" />
+    <ClInclude Include="headers\Utils.h" />
+    <ClInclude Include="headers\textManager.h" />
     <ClInclude Include="headers\threadUtils\threadUtils.h" />
     <ClInclude Include="headers\UserEventData.h" />
     <ClInclude Include="headers\vortexUtils\exception.h" />

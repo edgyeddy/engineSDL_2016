@@ -15,6 +15,9 @@ namespace vortex {
 		static const int SCREEN_FLAGS_WINDOWED; //!< Default windowed flags
 		static const int SCREEN_FLAGS_FULLSCREEN; //!< Default fullscreen flags
 
+		static const char *DEFAULT_FONT_PATH; //!< Default font path
+		static const int DEFAULT_FONT_SIZE = 20; //!< Default font size
+
 		// @PRODUCTION false
 		static const bool DEBUG_ENABLE = true; //!< To enable debug code 
 		// @PRODUCTION false

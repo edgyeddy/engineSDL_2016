@@ -9,16 +9,16 @@ namespace vortex {
 	GameMain *GameMain::sInstance = nullptr;
 
 	void GameMain::_initialize() {
-		vortex::Logger::d("Starting the program...");
+		vortex::Logger::d(TR("Starting the program..."));
 
 		// The surface contained by the window
-		SDL_Surface* screenSurface = NULL;
+		SDL_Surface* screenSurface = nullptr;
 
 		// Initialize SDL
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		{
 			std::ostringstream oss;
-			oss << "SDL could not initialize! SDL_Error: " << SDL_GetError();
+			oss << TR("SDL could not initialize! SDL_Error: ") << SDL_GetError();
 			Logger::e(oss.str());
 			return;
 		}
@@ -30,18 +30,28 @@ namespace vortex {
 			mInitialWindowConfig.windowHeight,
 			mInitialWindowConfig.screenFlags);
 
-		if (mWindow == NULL)
+		if (mWindow == nullptr)
 		{
-			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			std::ostringstream oss;
+			oss << TR("Window could not be created! SDL_Error: ") << SDL_GetError();
+			Logger::e(oss.str());
 			return;
 		}
 		// Initialize other
-		srand((unsigned int)time(NULL));
+		srand((unsigned int)time(nullptr));
 
 		if (mSceneManager == nullptr) {
 			mSceneManager = new SceneManager();
 		}
 		mSceneManager->initialize();
+		if (mAssetsManager == nullptr) {
+			mAssetsManager = new AssetsManager();
+		}
+		mAssetsManager->initialize();
+		if (mTextManager == nullptr) {
+			mTextManager = new TextManager();
+		}
+		mTextManager->initialize();
 		// @ADD-NEW-MANAGERS-HERE
 
 		mTimerFPS = this->launchUserEventAfterDelay(Constants::DELAY_PRINT_FPS_MS, EventTypeEnum::EVENT_PRINT_FPS, 0, 0, true);
@@ -58,10 +68,12 @@ namespace vortex {
 	}
 
 	void GameMain::_dispose() {
-		vortex::Logger::d("Closing the program...");
+		vortex::Logger::d(TR("Closing the program..."));
 
 		// Release objects
 		mSceneManager = static_cast<SceneManager*>(DELETE_OBJECT(mSceneManager));
+		mAssetsManager = static_cast<AssetsManager*>(DELETE_OBJECT(mAssetsManager));
+		mTextManager = static_cast<TextManager*>(DELETE_OBJECT(mTextManager));
 		// @ADD-NEW-MANAGERS-HERE
 
 		// Delete timer
@@ -107,7 +119,7 @@ namespace vortex {
 		this->onDraw();
 
 		//Main loop flag 
-		vortex::Logger::d("Starting event loop.");
+		vortex::Logger::d(TR("Starting event loop."));
 
 		Uint32 windowID = SDL_GetWindowID(mWindow);
 		bool quit = false;
@@ -152,7 +164,7 @@ namespace vortex {
 							int width = ev.window.data1;
 							int height = ev.window.data2;
 							std::ostringstream oss;
-							oss << "Resize screen to " << width << " x " << height;
+							oss << TR("Resize screen to ") << width << " x " << height;
 							vortex::Logger::d(oss.str());
 							// Redraw screen
 							this->onResize(screenSurface->w, screenSurface->h);
@@ -176,7 +188,7 @@ namespace vortex {
 
 				case SDL_KEYDOWN: {
 					if (ev.key.keysym.sym == SDLK_ESCAPE) {
-						vortex::Logger::d("Processing <ESC> keydown event.");
+						vortex::Logger::d(TR("Processing <ESC> keydown event."));
 						quit = true;
 					}
 					// TODO mGameState->updateKeyState(ev.key.keysym.scancode, true);
@@ -200,7 +212,7 @@ namespace vortex {
 					break;
 				}
 				case SDL_QUIT: {
-					vortex::Logger::d("Processing QUIT event.");
+					vortex::Logger::d(TR("Processing QUIT event."));
 					quit = true;
 					break;
 				} // case
@@ -246,7 +258,7 @@ namespace vortex {
 		userevent.type = SDL_USEREVENT;
 		userevent.code = data->type;
 		userevent.data1 = data;
-		userevent.data2 = NULL;
+		userevent.data2 = nullptr;
 		event.type = SDL_USEREVENT;
 		event.user = userevent;
 		SDL_PushEvent(&event);

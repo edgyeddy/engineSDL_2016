@@ -9,7 +9,6 @@ namespace vortex {
 		mBackgroundColor.g = 0;
 		mBackgroundColor.b = 255;
 		mBackgroundColor.a = 255;
-
 	}
 	void Scene::_dispose() {
 		// TODO
@@ -23,19 +22,19 @@ namespace vortex {
 	void Scene::draw(SDL_Window *window, bool updateFramebuffer) {
 		// TODO
 		// begin fake
-		
+
 		SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
 
-		SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, mBackgroundColor.r, mBackgroundColor.g, mBackgroundColor.b));
-		SDL_UpdateWindowSurface(window);
+		SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, mBackgroundColor.r, mBackgroundColor.g, mBackgroundColor.b));
+		if (updateFramebuffer) {
+			SDL_UpdateWindowSurface(window);
+		}
 		// end fake
-
-
 	}
 	void Scene::update(SDL_Window *window, int deltaMs) {
 		// TODO
 		mRatio += 0.0005f;
-		if (mRatio < 0) { mRatio += 1;  }
+		if (mRatio < 0) { mRatio += 1; }
 		else if (mRatio > 1) { mRatio -= 1; }
 
 		mBackgroundColor.r = (Uint8)(mRatio * 255.0f);

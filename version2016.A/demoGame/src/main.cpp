@@ -10,7 +10,7 @@
 int main(int argc, char* args[])
 {
 	try {
-		vortex::Logger::d("Program starts...");
+		vortex::Logger::d(TR("Program starts..."));
 		// Get (create) a game main instance
 		vortex::GameMain *master = vortex::GameMain::getInstance();
 		// Create and add a custom scene manager
@@ -38,11 +38,11 @@ int main(int argc, char* args[])
 	}
 
 	if (vortex::Constants::DEBUG_ENABLE) {
-		vortex::Logger::d("Quitting after 3 seconds.");
+		vortex::Logger::d(TR("Quitting after 3 seconds."));
 		vortex::ThreadUtils::sleepThisThreadSeconds(3);
 	}
 	else {
-		vortex::Logger::d("Done.");
+		vortex::Logger::d(TR("Done."));
 	}
 	return 0;
 }

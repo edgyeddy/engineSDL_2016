@@ -35,27 +35,27 @@ namespace vortex {
 		static void debugCheck() {
 			std::ostringstream oss;
 			if (Constants::DEBUG_ENABLE && Constants::DEBUG_VERBOSE) {
-				oss << "IDisposable created  = " << sObjectsCreated;
+				oss << TR("IDisposable created  = ") << sObjectsCreated;
 				Logger::d(oss.str());
 				oss.str("");
 				oss.clear();
-				oss << "IDisposable deleted  = " << sObjectsDeleted;
+				oss << TR("IDisposable deleted  = ") << sObjectsDeleted;
 				Logger::d(oss.str());
 				oss.str("");
 				oss.clear();
-				oss << "IDisposable initial. = " << sObjectsInitialized;
+				oss << TR("IDisposable initial. = ") << sObjectsInitialized;
 				Logger::d(oss.str());
 				oss.str("");
 				oss.clear();
-				oss << "IDisposable disposed = " << sObjectsDisposed;
+				oss << TR("IDisposable disposed = ") << sObjectsDisposed;
 				Logger::d(oss.str());
 			}
 			// Always check
 			if (sObjectsDeleted < (sObjectsCreated - 1)) { // -1 to allow GameMain to be a singleton.
-				Logger::w("Some of the IDisposableObject that have been created haven't been destroyed.");
+				Logger::w(TR("Some of the IDisposableObject that have been created haven't been destroyed."));
 			}
 			if (sObjectsDisposed < sObjectsInitialized) {
-				Logger::w("Some of the IDisposableObject that have been initialized haven't been disposed.");
+				Logger::w(TR("Some of the IDisposableObject that have been initialized haven't been disposed."));
 			}
 		}
 		//! Throws exception if the object is not ready
