@@ -18,6 +18,10 @@ namespace vortex {
 		static const char *DEFAULT_FONT_PATH; //!< Default font path
 		static const int DEFAULT_FONT_SIZE = 20; //!< Default font size
 
+	public:
+		static const int VIRTUAL_WIDTH = 8000;
+		static const int VIRTUAL_HEIGHT = 6000;
+
 		// @PRODUCTION false
 		static const bool DEBUG_ENABLE = true; //!< To enable debug code 
 		// @PRODUCTION false

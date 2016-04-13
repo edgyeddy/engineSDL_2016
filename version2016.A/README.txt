@@ -6,12 +6,15 @@ Additional "engineSDL" Visual Studio project settings (static library):
 	* Properties > C/C++ > General > Additional Included Directories
 		Add header directory ...\externLibs\visualCpp\SDL2-2.0.4\include
 		Add header directory ...\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include
+		Add header directory ...\externLibs\visualCpp\SDL2_gfx-1.0.1
 	* Properties > Configuration Properties > VC++ Directories > Library Directories
 		Add library directory ...\externLibs\visualCpp\SDL2-2.0.4\lib\x86
 		Add library directory ...\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\lib\x86
+		Add library directory ...\externLibs\visualCpp\SDL2_gfx-1.0.1\Win32\Debug
 	* Properties > Linker > Input > Additional dependencies
 		Add "SDL2.lib SDL2main.lib"
 		Add "SDL2_ttf.lib"
+		Add "SDL2_gfx.lib"
 	* Properties > C/C++ > All Options > Additional Options
 		Add -D_WIN32_WINNT=0x0501 
 

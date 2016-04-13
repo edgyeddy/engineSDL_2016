@@ -31,6 +31,9 @@ namespace vortex {
 	private:
 		bool mInitialized = false; //!< Is this object initialized?
 	public:
+		inline bool isInitialized() {
+			return mInitialized;
+		}
 		//! On program exit, checks if there are zombie objects.
 		static void debugCheck() {
 			std::ostringstream oss;

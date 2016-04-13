@@ -4,6 +4,13 @@ namespace vortex {
 	//! Wraps the SDL_Rect struct.
 	class Rectangle {
 	public:
+		//! Modes of rectangle adjustment.
+		enum RectangleAdjustEnum {
+			STRETCH_TO_FIT, 
+			ADJUST_INSIDE,
+			ADJUST_OUTSIDE
+		};
+	public:
 		SDL_Rect Rect; //!< Public wrapped struct.
 	public:
 		//! Constructor
@@ -18,8 +25,14 @@ namespace vortex {
 			Rectangle out = Rectangle(surface->w, surface->h, 0, 0);
 			return out;
 		}
+		//! Creates a rectangle so the input area matches.
+		static Rectangle stretchToFit(const Rectangle &targetScreenSize) {
+			Rectangle out;
+			out = targetScreenSize;
+			return out;
+		}
 		//! Creates a rectangle so the input area is fully outside it.
-		static Rectangle createInsideWithRatio(Rectangle &area, int lengthX, int lengthY) {
+		static Rectangle createInsideWithRatio(const Rectangle &area, int lengthX, int lengthY) {
 			Rectangle out;
 			double ratioSrc = (double)area.Rect.w / (double)area.Rect.h;
 			double ratioDst = (double)lengthX / (double)lengthY;
@@ -41,7 +54,7 @@ namespace vortex {
 			return out;
 		}
 		//! Creates a rectangle so the input area is fully inside it.
-		static Rectangle createOutsideWithRatio(Rectangle &area, int lengthX, int lengthY) {
+		static Rectangle createOutsideWithRatio(const Rectangle &area, int lengthX, int lengthY) {
 			Rectangle out;
 			double ratioSrc = (double)area.Rect.w / (double)area.Rect.h;
 			double ratioDst = (double)lengthX / (double)lengthY;
@@ -63,6 +76,21 @@ namespace vortex {
 			}
 			return out;
 		}
+		//! Adjusts source rectangle to target rectangle, according to adjustment mode.
+		static Rectangle adjustRectangle(RectangleAdjustEnum mode, const Rectangle &sourceRect, const Rectangle &targetRect) {
+			Rectangle newImageSize;
+			if (mode == RectangleAdjustEnum::STRETCH_TO_FIT) {
+				newImageSize = Rectangle::stretchToFit(targetRect);
+			}
+			else if (mode == RectangleAdjustEnum::ADJUST_INSIDE) {
+				newImageSize = Rectangle::createInsideWithRatio(targetRect, sourceRect.Rect.w, sourceRect.Rect.h);
+			}
+			else if (mode == RectangleAdjustEnum::ADJUST_OUTSIDE) {
+				newImageSize = Rectangle::createOutsideWithRatio(targetRect, sourceRect.Rect.w, sourceRect.Rect.h);
+			}
+			newImageSize.centerInParent(targetRect);
+			return newImageSize;
+		}
 		//! Centers this rectangle inside the parent rectangle.
 		void centerInParent(const Rectangle &parent) {
 			// 1) Updates this->xy to center this in the parent box
@@ -74,6 +102,20 @@ namespace vortex {
 			std::ostringstream oss;
 			oss << "rect[w=" << Rect.w << " h=" << Rect.h << " x=" << Rect.x << " y=" << Rect.y << "]";
 			return oss.str();
+		}
+		Rectangle mapVirtualToReal(int realWidth, int realHeight, int virtualWidth, int virtualHeight) const {
+			Rectangle real;
+			Rectangle realWindow(realWidth, realHeight, 0, 0);
+			Rectangle realTarget = createInsideWithRatio(realWindow, virtualWidth, virtualHeight);
+			// Map self virtual coordinates to real target coordinates
+			float scaleX = (float)realTarget.Rect.w / (float)virtualWidth;
+			float scaleY = (float)realTarget.Rect.h / (float)virtualHeight;
+			real.Rect.w = (int)(this->Rect.w * scaleX);
+			real.Rect.h = (int)(this->Rect.h * scaleY);
+			real.Rect.x = realTarget.Rect.x + (int)(this->Rect.x * scaleX);
+			real.Rect.y = realTarget.Rect.y + (int)(this->Rect.y * scaleY);
+
+			return real;
 		}
 	};
 }

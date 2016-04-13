@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "SDL.h"
+#include "Utils.h"
 
 namespace vortex {
 
@@ -9,31 +10,41 @@ namespace vortex {
 		mBackgroundColor.g = 0;
 		mBackgroundColor.b = 255;
 		mBackgroundColor.a = 255;
+
+		mUiManager = new UiManager();
+		mUiManager->initialize();
 	}
 	void Scene::_dispose() {
 		// TODO
+		mUiManager = static_cast<UiManager*>(DELETE_OBJECT(mUiManager));
 	}
-	void Scene::onUserEvent(UserEventData *data) {
+	void Scene::resize(SDL_Window *windowOldSize, int width, int height) {
 		// TODO
+		mUiManager->resize(windowOldSize, width, height);
 	}
-	void Scene::resize(SDL_Window *window, int width, int height) {
-		// TODO
+	void Scene::drawFront(SDL_Window *window, bool updateFramebuffer) {
+		SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
+		// Draw UI overlay
+		mUiManager->draw(window);
+	}
+	void Scene::drawBack(SDL_Window *window, bool updateFramebuffer) {
+		SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
+		// Draw background
+		SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, mBackgroundColor.r, mBackgroundColor.g, mBackgroundColor.b));
 	}
 	void Scene::draw(SDL_Window *window, bool updateFramebuffer) {
-		// TODO
-		// begin fake
-
-		SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
-
-		SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, mBackgroundColor.r, mBackgroundColor.g, mBackgroundColor.b));
+		/*
+		// Draw buffer
 		if (updateFramebuffer) {
 			SDL_UpdateWindowSurface(window);
 		}
-		// end fake
+		*/
 	}
 	void Scene::update(SDL_Window *window, int deltaMs) {
-		// TODO
-		mRatio += 0.0005f;
+		
+		mUiManager->update(window, deltaMs);
+		// TODO : Adjust to framerate
+		mRatio += SDLUtils::computeDelta(0.0002f, deltaMs);
 		if (mRatio < 0) { mRatio += 1; }
 		else if (mRatio > 1) { mRatio -= 1; }
 

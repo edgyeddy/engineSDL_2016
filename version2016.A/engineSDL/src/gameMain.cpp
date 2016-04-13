@@ -110,6 +110,11 @@ namespace vortex {
 		}
 		return GameMain::sInstance;
 	}
+	Rectangle GameMain::getWindowSize() {
+		SDL_Surface* screenSurface = SDL_GetWindowSurface(mWindow);
+		Rectangle out(screenSurface->w, screenSurface->h, 0, 0);
+		return out;
+	}
 	void GameMain::mainLoop() {
 		// Get window surface
 		SDL_Surface* screenSurface = SDL_GetWindowSurface(mWindow);
@@ -167,7 +172,7 @@ namespace vortex {
 							oss << TR("Resize screen to ") << width << " x " << height;
 							vortex::Logger::d(oss.str());
 							// Redraw screen
-							this->onResize(screenSurface->w, screenSurface->h);
+							this->onResize(width, height); // screenSurface->w, screenSurface->h);
 							this->onDraw();
 							break;
 						}
@@ -198,17 +203,17 @@ namespace vortex {
 				} // case
 				case SDL_MOUSEMOTION:
 				{
-					// TODO mSceneManager->getCurrentScene()->onMouseMovementEvent(ev.motion);
+					mSceneManager->getCurrentScene()->onMouseMovementEvent(ev.motion);
 					break;
 				}
 				case SDL_MOUSEBUTTONUP:
 				{
-					// TODO mSceneManager->getCurrentScene()->onMouseClickUpEvent(ev.button);
+					mSceneManager->getCurrentScene()->onMouseClickUpEvent(ev.button);
 					break;
 				}
 				case SDL_MOUSEBUTTONDOWN:
 				{
-					// TODO mSceneManager->getCurrentScene()->onMouseClickDownEvent(ev.button);
+					mSceneManager->getCurrentScene()->onMouseClickDownEvent(ev.button);
 					break;
 				}
 				case SDL_QUIT: {

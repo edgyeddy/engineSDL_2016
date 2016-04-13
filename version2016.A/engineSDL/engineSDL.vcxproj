@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ENGINESDL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_gfx-1.0.1;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_WIN32_WINNT=0x0501</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -157,6 +157,14 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\sceneManager.cpp" />
     <ClCompile Include="src\textManager.cpp" />
+    <ClCompile Include="src\ui\baseWidget.cpp" />
+    <ClCompile Include="src\ui\boxWidget.cpp" />
+    <ClCompile Include="src\ui\checkButtonWidget.cpp" />
+    <ClCompile Include="src\ui\clickableButtonWidget.cpp" />
+    <ClCompile Include="src\ui\hBoxWidget.cpp" />
+    <ClCompile Include="src\ui\textLabelWidget.cpp" />
+    <ClCompile Include="src\ui\UiManager.cpp" />
+    <ClCompile Include="src\ui\vBoxWidget.cpp" />
     <ClCompile Include="src\vortexUtils\templateArray.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +179,15 @@
     <ClInclude Include="headers\Rectangle.h" />
     <ClInclude Include="headers\Scene.h" />
     <ClInclude Include="headers\sceneManager.h" />
+    <ClInclude Include="headers\ui\baseWidget.h" />
+    <ClInclude Include="headers\ui\boxWidget.h" />
+    <ClInclude Include="headers\ui\checkButtonWidget.h" />
+    <ClInclude Include="headers\ui\clickableButtonWidget.h" />
+    <ClInclude Include="headers\ui\hBoxWidget.h" />
+    <ClInclude Include="headers\ui\radioButtonWidget.h" />
+    <ClInclude Include="headers\ui\textLabelWidget.h" />
+    <ClInclude Include="headers\ui\UiManager.h" />
+    <ClInclude Include="headers\ui\vBoxWidget.h" />
     <ClInclude Include="headers\Utils.h" />
     <ClInclude Include="headers\textManager.h" />
     <ClInclude Include="headers\threadUtils\threadUtils.h" />

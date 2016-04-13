@@ -67,13 +67,14 @@ namespace vortex {
 	protected:
 		void _initialize() override;
 		void _dispose() override;
-	protected:
+	public:
 		void computeFpsString(); //!< Generates and stores the FPS string
 		std::string getFpsString(); //!< Gets the cached FPS string
 		///! Launcher a user event to the event queue after a delay.
 		SDL_TimerID launchUserEventAfterDelay(int delayMs, int eventId, int64_t eventData1, int64_t eventData2, bool repeat);
 		///! Launcher a user event to the event queue right now.
 		void launchUserEvent(int eventId, int64_t eventData1, int64_t eventData2, bool repeat);
+	protected:
 		/// Constructor
 		GameMain();
 	public:
@@ -82,6 +83,7 @@ namespace vortex {
 		void setSceneManager(SceneManager *sceneManager); //!< Transfers ownership of this SceneManager instance to GameMain.
 		void mainLoop(); //!< Main event loop (indefinite)
 		void loadScene(int sceneId); //!< Loads the given scene
+		Rectangle getWindowSize();
 	protected:
 		void onTimeUpdate(); //!< Informs the current scene to perform a time update
 		void onDraw(); //!< Redraws the main window, according to the current scene

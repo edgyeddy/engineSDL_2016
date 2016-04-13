@@ -69,17 +69,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\lib\x86;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_gfx-1.0.1\Win32\Debug;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\lib\x86;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\demoGame\headers;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_gfx-1.0.1;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\demoGame\headers;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -127,6 +127,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\buttonQuit.h" />
     <ClInclude Include="headers\demoScene.h" />
     <ClInclude Include="headers\mySceneManager.h" />
   </ItemGroup>
