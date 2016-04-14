@@ -4,6 +4,7 @@
 #include "SDL2_rotozoom.h"
 #include <string>
 #include <fstream>
+#include "gameMain.h"
 
 namespace vortex {
 
@@ -13,6 +14,7 @@ namespace vortex {
 	//! Provides several SDL-related utility functions.
 	class SDLUtils {
 	public:
+		//! Compute the delta distance from speed and delta time.
 		static inline float computeDelta(float speed_units_per_ms, int time_ms) {
 			// Speed = distance / time
 			// distance = speed * time
@@ -43,39 +45,7 @@ namespace vortex {
 			SDL_BlitSurface(surfaceSurface, nullptr, windowSurface, &rect);
 		}
 		//! Given an original surface and a (optional) scaled image, generates (or reuses) a scaled image to match the target size.
-		static inline SDL_Surface *scaleSurfaceIfNeeded(SDL_Surface *originalSurface, SDL_Surface *scaledSurface, int targetWidth, int targetHeight) {
-			int srcWidth = originalSurface->w;
-			int srcHeight = originalSurface->h;
-			int curWidth;
-			int curHeight;
-			bool mustResize = false;
-			if (scaledSurface == nullptr) {
-				mustResize = true;
-			}
-			else {
-				curWidth = scaledSurface->w;
-				curHeight = scaledSurface->h;
-				if (curWidth != targetWidth || curHeight != targetHeight) {
-					mustResize = true;
-				}
-			}
-
-			if (mustResize) {
-				std::ostringstream oss;
-				oss << "Resizing texture from w=" << srcWidth << " h=" << srcHeight << " to w=" << targetWidth << " h=" << targetHeight;
-				Logger::d(oss.str());
-				// Delete previous scaled surface
-				SDL_FreeSurface(scaledSurface);
-				scaledSurface = nullptr;
-				// Scale original to new scale
-				double scaleX = ((double)(targetWidth)) / ((double)(srcWidth));
-				double scaleY = ((double)(targetHeight)) / ((double)(srcHeight));
-				SDL_Surface *output = zoomSurface(originalSurface, scaleX, scaleY, SMOOTHING_ON);
-				return output;
-			}
-			else {
-				return scaledSurface; // no change
-			}
-		}
+		static SDL_Surface *scaleSurfaceIfNeeded(SDL_Surface *originalSurface, SDL_Surface *scaledSurface, int targetWidth, int targetHeight, const std::string &debugName, bool useAssetsManager = true);
+		
 	};
 }

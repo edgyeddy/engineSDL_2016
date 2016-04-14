@@ -77,6 +77,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_gfx-1.0.1;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\demoGame\headers;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -117,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\buttonRadioMode.cpp" />
     <ClCompile Include="src\demoScene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mySceneManager.cpp" />
@@ -128,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\buttonQuit.h" />
+    <ClInclude Include="headers\buttonRadioMode.h" />
     <ClInclude Include="headers\demoScene.h" />
     <ClInclude Include="headers\mySceneManager.h" />
   </ItemGroup>

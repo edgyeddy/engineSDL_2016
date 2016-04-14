@@ -31,6 +31,7 @@ namespace vortex {
 	private:
 		bool mInitialized = false; //!< Is this object initialized?
 	public:
+		//! Getter
 		inline bool isInitialized() {
 			return mInitialized;
 		}

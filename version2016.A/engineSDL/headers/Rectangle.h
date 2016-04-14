@@ -1,5 +1,7 @@
 #pragma once
 #include "SDL.h"
+#include <string>
+#include <sstream>
 namespace vortex {
 	//! Wraps the SDL_Rect struct.
 	class Rectangle {
@@ -103,6 +105,7 @@ namespace vortex {
 			oss << "rect[w=" << Rect.w << " h=" << Rect.h << " x=" << Rect.x << " y=" << Rect.y << "]";
 			return oss.str();
 		}
+		//! Transforms these virtual coordenades to a screen-coordinates, assuming the adjust mode as map-inside.
 		Rectangle mapVirtualToReal(int realWidth, int realHeight, int virtualWidth, int virtualHeight) const {
 			Rectangle real;
 			Rectangle realWindow(realWidth, realHeight, 0, 0);

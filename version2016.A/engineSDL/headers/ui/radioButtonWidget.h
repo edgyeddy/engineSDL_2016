@@ -3,6 +3,7 @@
 #include "boxWidget.h"
 
 namespace vortex {
+	//! UI widget: A radio check button.
 	class RadioButtonWidget : public CheckButtonWidget {
 	public:
 		//! Constructor

@@ -5,9 +5,10 @@
 #include "UserEventData.h"
 
 namespace vortex {
+	//! A class to manage all UI widgets.
 	class UiManager : public IDisposableObject {
 	protected:
-		BaseWidget *mRoot;
+		BaseWidget *mRoot; //!< Root widget.
 	protected:
 		//! Must be implemented in derived class
 		virtual void _initialize() override;
@@ -28,11 +29,15 @@ namespace vortex {
 		virtual void draw(SDL_Window *window); //!< Inform the scene that the window must be redrawn; must be re-implemented in derived class.
 		virtual void update(SDL_Window *window, int deltaMs); //!< Inform the scene that a time interval has passed; must be re-implemented in derived class.
 	public:
-		// Events
+		//! Event handler.
 		bool onUserEvent(UserEventData *data);
+		//! Event handler.
 		bool onMouseMovementEvent(SDL_MouseMotionEvent event);
+		//! Event handler.
 		bool onMouseClickDownEvent(SDL_MouseButtonEvent event);
+		//! Event handler.
 		bool onMouseClickUpEvent(SDL_MouseButtonEvent event);
+		//! Event handler.
 		bool onKeyPressedEvent(int keyId);
 	};
 }

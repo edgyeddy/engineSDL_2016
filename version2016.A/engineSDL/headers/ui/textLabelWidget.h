@@ -5,13 +5,15 @@
 #include "color4.h"
 
 namespace vortex {
+	//! UI widget: A text label.
 	class TextLabelWidget : public BaseWidget {
 	protected:
-		Color4 mBackgroundColor;
-		Color4 mTextColor;
-		std::string mText;
-		SDL_Surface *mTextSurface; //!< Owned by this class
-		Rectangle mWidgetScreenPosition;
+		Color4 mBackgroundColor; //!< Background color
+		Color4 mTextColor; //!< Text color
+		std::string mText; //!< Text to display
+		SDL_Surface *mTextOriginal; //!< Original surface with text.
+		SDL_Surface *mTextSurface; //!< Scaled surface with text.
+		Rectangle mWidgetScreenPosition; //!< Screen position for the widget.
 		Rectangle mTextScreenPosition; //!< Text screen bounding box should smaller than the widget screen bounding box
 	protected:
 		//! Must be implemented in derived class
@@ -26,6 +28,7 @@ namespace vortex {
 			mText = text;
 		}
 		virtual void draw(SDL_Window *window) override; //!< Inform the scene that the window must be redrawn; must be re-implemented in derived class.
+		//! Apply resizing to this widget.
 		virtual void resize(SDL_Window *windowOldSize, int width, int height) override;
 	};
 }

@@ -2,6 +2,7 @@
 #include "clickableButtonWidget.h"
 
 namespace vortex {
+	//! UI widget: A check button.
 	class CheckButtonWidget : public ClickableButtonWidget {
 	protected:
 		bool mIsChecked = false; //!< This button is in state "checked"
@@ -15,6 +16,7 @@ namespace vortex {
 			return mIsChecked;
 		}
 	protected:
+		//! Getter
 		virtual SDL_Surface *getCurrentBackgroundTexture() override {
 			if (isChecked() || isPressed()) {
 				return mPressedBackgroundSurface;
@@ -33,6 +35,7 @@ namespace vortex {
 			// NOOP
 		}
 	public:
+		//! Event handler.
 		virtual void onMouseClickUpEvent() override {
 			setChecked(!isChecked());
 		}

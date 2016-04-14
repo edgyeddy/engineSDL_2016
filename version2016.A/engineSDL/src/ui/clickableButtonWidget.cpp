@@ -81,18 +81,18 @@ namespace vortex {
 		SDL_Surface *originalImage;
 
 		// Recompute textures
-		originalImage = GameMain::getInstance()->getAssetsManager()->getBitmapReference(mNormalBackgroundPath);
-		mNormalBackgroundSurface = SDLUtils::scaleSurfaceIfNeeded(originalImage, mNormalBackgroundSurface, newImageSize.Rect.w, newImageSize.Rect.h);
+		originalImage = GameMain::getInstance()->getAssetsManager()->getBitmapReferenceFromFile(mNormalBackgroundPath, false, "ClickButton.originalNormalBackground");
+		mNormalBackgroundSurface = SDLUtils::scaleSurfaceIfNeeded(originalImage, mNormalBackgroundSurface, newImageSize.Rect.w, newImageSize.Rect.h, "ClickButton.NormalBackground.scaled");
 
-		originalImage = GameMain::getInstance()->getAssetsManager()->getBitmapReference(mPressedBackgroundPath);
-		mPressedBackgroundSurface = SDLUtils::scaleSurfaceIfNeeded(originalImage, mPressedBackgroundSurface, newImageSize.Rect.w, newImageSize.Rect.h);
+		originalImage = GameMain::getInstance()->getAssetsManager()->getBitmapReferenceFromFile(mPressedBackgroundPath, false, "ClickButton.originalPressedBackground");
+		mPressedBackgroundSurface = SDLUtils::scaleSurfaceIfNeeded(originalImage, mPressedBackgroundSurface, newImageSize.Rect.w, newImageSize.Rect.h, "ClickButton.PressedBackground.scaled");
 	}
 	void ClickableButtonWidget::_initialize() {
 		TextLabelWidget::_initialize();
 
 		SDL_Surface *unused;
-		unused = GameMain::getInstance()->getAssetsManager()->getBitmapReference(this->mNormalBackgroundPath);
-		unused = GameMain::getInstance()->getAssetsManager()->getBitmapReference(this->mPressedBackgroundPath);
+		unused = GameMain::getInstance()->getAssetsManager()->getBitmapReferenceFromFile(this->mNormalBackgroundPath, false, "ClickButton.originalNormalBackground");
+		unused = GameMain::getInstance()->getAssetsManager()->getBitmapReferenceFromFile(this->mPressedBackgroundPath, false, "ClickButton.originalPressedBackground");
 		// Textures
 		mNormalBackgroundSurface = nullptr;
 		mPressedBackgroundSurface = nullptr;
@@ -100,10 +100,10 @@ namespace vortex {
 	void ClickableButtonWidget::_dispose() {
 		TextLabelWidget::_dispose();
 
-		SDL_FreeSurface(mNormalBackgroundSurface);
+		// SDL_FreeSurface(mNormalBackgroundSurface); Not owned by me
 		mNormalBackgroundSurface = nullptr;
 
-		SDL_FreeSurface(mPressedBackgroundSurface);
+		// SDL_FreeSurface(mPressedBackgroundSurface); Not owned by me
 		mPressedBackgroundSurface = nullptr;
 	}
 }

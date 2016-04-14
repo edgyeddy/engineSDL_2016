@@ -19,7 +19,9 @@ namespace vortex {
 		static const int DEFAULT_FONT_SIZE = 20; //!< Default font size
 
 	public:
+		//! Default width of the UI interface
 		static const int VIRTUAL_WIDTH = 8000;
+		//! Default height of the UI interface
 		static const int VIRTUAL_HEIGHT = 6000;
 
 		// @PRODUCTION false

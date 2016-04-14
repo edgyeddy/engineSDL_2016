@@ -3,15 +3,19 @@
 #include "Utils.h"
 #include <deque>
 namespace vortex {
+	//! UI widget: A generic widget container.
 	class BoxWidget : public BaseWidget {
 	protected:
+		//! Padding to apply.
 		int mPadding = 0;
 		//! Note: Children widgets are placed in relative coordinates
 		std::deque<BaseWidget*> mChildren;
 	public:
+		//! Getter
 		inline BaseWidget *getChildAt(int index) {
 			return mChildren.at(index);
 		}
+		//! Getter
 		inline int getNumChildren() {
 			return mChildren.size();
 		}
@@ -40,7 +44,7 @@ namespace vortex {
 	protected:
 		//! Returns the top-left position for this item
 		virtual Rectangle updateVirtualRectangle(const Rectangle &newItemVirtualRectangle) = 0;
-
+		//! Updates the virtual and real position and size of the container and the last-added item.
 		void updateAllCoordinatesAfterAdding(BaseWidget *item) {
 			Rectangle oldBoxVirtualSize = this->mVirtualRectangle;
 			// 1) Updates the virtual coordinates of box.w / box.h
@@ -73,14 +77,23 @@ namespace vortex {
 		}
 	public:
 		// Events
+
+		//! Event handler
 		virtual bool onMouseMovementEvent(SDL_MouseMotionEvent event);
+		//! Event handler
 		virtual bool onMouseClickDownEvent(SDL_MouseButtonEvent event);
+		//! Event handler
 		virtual bool onMouseClickUpEvent(SDL_MouseButtonEvent event);
+		//! Event handler
 		virtual bool onUserEvent(UserEventData *data);
+		//! Event handler
 		virtual bool onKeyPressedEvent(int keyId);
 	public:
+		//! Apply resizing to this widget and its contents.
 		virtual void resize(SDL_Window *windowOldSize, int width, int height) override; //!< Inform the scene that the window has been resized; must be re-implemented in derived class.
+		//! Draw this widget and its contents.
 		virtual void draw(SDL_Window *window) override; //!< Inform the scene that the window must be redrawn; must be re-implemented in derived class.
+		//! Update this widget and its contents.
 		virtual void update(SDL_Window *window, int deltaMs) override; //!< Inform the scene that a time interval has passed; must be re-implemented in derived class.
 	};
 }

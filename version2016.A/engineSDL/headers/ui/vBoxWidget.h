@@ -3,6 +3,7 @@
 #include "Utils.h"
 
 namespace vortex {
+	//! UI widget: A vertical widget container.
 	class VBoxWidget : public BoxWidget {
 	protected:
 		virtual Rectangle updateVirtualRectangle(const Rectangle &newItemVirtualRectangle) override {

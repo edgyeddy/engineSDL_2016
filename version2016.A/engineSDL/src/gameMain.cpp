@@ -141,6 +141,13 @@ namespace vortex {
 						Logger::d(getFpsString());
 						// NOTE: UserEventData for repeat event SHOULD NOT be released.
 					}
+					else if (ev.user.code == EventTypeEnum::EVENT_REFRESH_SCREEN) {
+						delete data;
+						data = nullptr;
+						Rectangle rect = this->getWindowSize();
+						this->onResize(rect.Rect.w, rect.Rect.h); // screenSurface->w, screenSurface->h);
+						this->onDraw();
+					}
 					/*
 					//void(*p) (void*) = ev.user.data1;
 					//p(event.user.data2);

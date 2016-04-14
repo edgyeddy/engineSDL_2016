@@ -11,6 +11,7 @@ namespace vortex {
 		/// Some of the specific user events this engine can parse.
 		enum EventTypeEnum {
 			EVENT_PRINT_FPS,
+			EVENT_REFRESH_SCREEN,
 			USER_EVENTS_BASE_INDEX = 1000,
 		};
 	public:
@@ -83,6 +84,7 @@ namespace vortex {
 		void setSceneManager(SceneManager *sceneManager); //!< Transfers ownership of this SceneManager instance to GameMain.
 		void mainLoop(); //!< Main event loop (indefinite)
 		void loadScene(int sceneId); //!< Loads the given scene
+		//! Getter
 		Rectangle getWindowSize();
 	protected:
 		void onTimeUpdate(); //!< Informs the current scene to perform a time update

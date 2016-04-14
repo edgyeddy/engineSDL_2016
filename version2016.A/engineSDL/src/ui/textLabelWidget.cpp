@@ -5,11 +5,13 @@
 
 namespace vortex {
 	void TextLabelWidget::_initialize() {
-		mTextSurface = GameMain::getInstance()->getTextManager()->renderTextToSurface(mText, mTextColor); //  , Color4::getColor4(0, 0, 0));
+		mTextOriginal = GameMain::getInstance()->getTextManager()->renderTextToSurface(mText, mTextColor); //  , Color4::getColor4(0, 0, 0));
 	}
 	void TextLabelWidget::_dispose() {
-		SDL_FreeSurface(mTextSurface);
+		// SDL_FreeSurface(mTextSurface); Not owned by me
 		mTextSurface = nullptr;
+
+		mTextOriginal = nullptr; // Not owned by me
 	}
 	void TextLabelWidget::draw(SDL_Window *window) {
 		SDL_Surface* screenSurface = SDL_GetWindowSurface(window);
@@ -31,10 +33,10 @@ namespace vortex {
 		*/
 		mTextScreenPosition = Rectangle::createInsideWithRatio(mWidgetScreenPosition, textBox.Rect.w, textBox.Rect.h);
 		// Resize text size to target size
-		SDL_Surface *original = GameMain::getInstance()->getTextManager()->renderTextToSurface(mText, mTextColor); //  , Color4::getColor4(0, 0, 0));
-		mTextSurface = SDLUtils::scaleSurfaceIfNeeded(original, mTextSurface, mTextScreenPosition.Rect.w, mTextScreenPosition.Rect.h);
-		SDL_FreeSurface(original);
-		original = nullptr;
+		//SDL_Surface *original = GameMain::getInstance()->getTextManager()->renderTextToSurface(mText, mTextColor); //  , Color4::getColor4(0, 0, 0));
+		mTextSurface = SDLUtils::scaleSurfaceIfNeeded(mTextOriginal, mTextSurface, mTextScreenPosition.Rect.w, mTextScreenPosition.Rect.h, "TextLabel.Text.scaled");
+		//SDL_FreeSurface(original);
+		//original = nullptr;
 		// Compute text position and size
 		// Regenerate texture
 		//mTextSurface = SDLUtils::scaleSurfaceIfNeeded(originalImage, mBackgroundImage, newImageSize.Rect.w, newImageSize.Rect.h);
