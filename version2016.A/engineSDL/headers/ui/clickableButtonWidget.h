@@ -9,8 +9,8 @@ namespace vortex {
 	public:
 		std::string mNormalBackgroundPath; //!< Path to normal background texture.
 		std::string mPressedBackgroundPath; //!< Path to pressed background texture.
-		SDL_Surface *mNormalBackgroundSurface; //!< Normal background surface.
-		SDL_Surface *mPressedBackgroundSurface; //!< Pressed background surface.
+		SDL_Surface *mNormalBackgroundSurface = nullptr; //!< Normal background surface.
+		SDL_Surface *mPressedBackgroundSurface = nullptr; //!< Pressed background surface.
 	protected:
 		bool mIsPressed = false; //!< Mouse cursor was above the button when a l-click down event was produced.
 		bool mIsHover = false; //!< Mouse cursor is above the button.

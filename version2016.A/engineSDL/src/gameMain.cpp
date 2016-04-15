@@ -29,7 +29,7 @@ namespace vortex {
 			mInitialWindowConfig.windowWidth,
 			mInitialWindowConfig.windowHeight,
 			mInitialWindowConfig.screenFlags);
-
+		
 		if (mWindow == nullptr)
 		{
 			std::ostringstream oss;
@@ -37,6 +37,13 @@ namespace vortex {
 			Logger::e(oss.str());
 			return;
 		}
+
+		// Set window icon
+		SDL_Surface *iconSurface = SDL_LoadBMP(mInitialWindowConfig.iconPath.c_str());
+		SDL_SetWindowIcon(mWindow, iconSurface);
+		SDL_FreeSurface(iconSurface);
+		iconSurface = nullptr;
+
 		// Initialize other
 		srand((unsigned int)time(nullptr));
 

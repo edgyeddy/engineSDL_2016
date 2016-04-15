@@ -12,7 +12,7 @@ namespace vortex {
 		Color4 mTextColor; //!< Text color
 		std::string mText; //!< Text to display
 		SDL_Surface *mTextOriginal; //!< Original surface with text.
-		SDL_Surface *mTextSurface; //!< Scaled surface with text.
+		SDL_Surface *mTextSurface = nullptr; //!< Scaled surface with text.
 		Rectangle mWidgetScreenPosition; //!< Screen position for the widget.
 		Rectangle mTextScreenPosition; //!< Text screen bounding box should smaller than the widget screen bounding box
 	protected:

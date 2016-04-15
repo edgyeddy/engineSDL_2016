@@ -18,6 +18,7 @@ namespace vortex {
 		/// Contains the initial window configuration.
 		class MainWindowConfig {
 		public:
+			std::string iconPath; //!< Path to 32x32 window icon bitmap file.
 			std::string screenTitle; //!< Window title text.
 			int windowWidth; //!< Window width
 			int windowHeight; //!< Window height
@@ -26,7 +27,15 @@ namespace vortex {
 		public:
 			//! Constructor, sets defaults values
 			MainWindowConfig() {
-				screenTitle = "EngineSDL";
+				_init("EngineSDL", "");
+			}
+			MainWindowConfig(const std::string &screenTitle, const std::string &windowIconPath) {
+				_init(screenTitle, windowIconPath);
+			}
+		protected:
+			inline void _init(const std::string &screenTitle, const std::string &windowIconPath) {
+				this->iconPath = windowIconPath;
+				this->screenTitle = screenTitle;
 				fullscreen = Constants::USE_FULLSCREEN;
 				if (fullscreen) {
 					windowWidth = Constants::FULLSCREEN_WINDOW_WIDTH;
@@ -65,6 +74,9 @@ namespace vortex {
 		inline SceneManager *getSceneManager() {
 			return mSceneManager;
 		} //!< Getter
+		inline MainWindowConfig &getMainWindowConfigRef() {
+			return mInitialWindowConfig;
+		}
 	protected:
 		void _initialize() override;
 		void _dispose() override;

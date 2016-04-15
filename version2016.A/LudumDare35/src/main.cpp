@@ -17,11 +17,11 @@ int main(int argc, char* args[])
 		master->setSceneManager(new vortex::MySceneManager());
 		// Configure custom icon
 		master->getMainWindowConfigRef().iconPath = "resources/window_icon32.bmp";
-		master->getMainWindowConfigRef().screenTitle = TR("DemoGame");
+		master->getMainWindowConfigRef().screenTitle = TR("LudumDare 35 (edgyeddy 2016-04-1X)");
 		// Prepare a SDL window and perform other initialization duties.
 		master->initialize();
 		// Load initial scene
-		master->loadScene(vortex::MySceneManager::SceneTypeEnum::DEMO_SCENE);
+		master->loadScene(vortex::MySceneManager::SceneTypeEnum::MAIN_SCENE);
 		// Execute main event loop	
 		master->mainLoop();
 		// Release SDL resources and all disposable objects.
