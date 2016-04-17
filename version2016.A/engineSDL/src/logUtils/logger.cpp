@@ -4,10 +4,16 @@
 #include <exception>
 #include <sstream>
 #include <iostream>
+#include "constants.h"
 
 namespace vortex {
 	void Logger::d(std::string msg) {
-		Logger::log(msg, "d");
+		if (Constants::DEBUG_ENABLE) {
+			Logger::log(msg, "d");
+		}
+	}
+	void Logger::t(std::string msg) {
+		Logger::log(msg, "t");
 	}
 	void Logger::e(std::exception &ex) {
 		Logger::log("std::EXCEPTION: " + std::string(ex.what()), "e");

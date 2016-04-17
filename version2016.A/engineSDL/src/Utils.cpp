@@ -1,14 +1,27 @@
 #include "Utils.h"
 namespace vortex {
+	Json::Value SDLUtils::loadJson(std::string &jsonFile) {
+		Json::Reader reader;
+		Json::Value root;
+
+		std::string jsonText = SDLUtils::readFileToString(jsonFile);
+		bool parseOk = reader.parse(jsonText, root);
+		if (!parseOk) {
+			std::ostringstream oss;
+			oss << TR("Error parsing JSON file=") << jsonFile;
+			throw Exception(oss.str());
+		}
+		return root;
+	}
+
 	SDL_Surface *SDLUtils::scaleSurfaceIfNeeded(SDL_Surface *originalSurface, SDL_Surface *scaledSurface, int targetWidth, int targetHeight, const std::string &debugName, bool useAssetsManager) {
 		int srcWidth = originalSurface->w;
 		int srcHeight = originalSurface->h;
 		int curWidth;
 		int curHeight;
 		bool mustResize = false;
-		std::ostringstream oss;
-		oss << originalSurface << "#" << targetWidth << "#" << targetHeight;
-		std::string uniqueNameNew = oss.str();
+		
+		std::string uniqueNameNew = AssetsManager::generateUniqueName(originalSurface, targetWidth, targetHeight);
 
 		if (scaledSurface == nullptr) {
 			mustResize = true;
@@ -28,10 +41,7 @@ namespace vortex {
 			// Delete previous scaled surface
 			if (useAssetsManager) {
 				if (scaledSurface != nullptr) {
-					std::string uniqueNameOld;
-					oss.str("");
-					oss << originalSurface << "#" << scaledSurface->w << "#" << scaledSurface->h;
-					uniqueNameOld = oss.str();
+					std::string uniqueNameOld = AssetsManager::generateUniqueName(originalSurface, scaledSurface->w, scaledSurface->h);
 					auto deleted = GameMain::getInstance()->getAssetsManager()->forgetBitmapReference(uniqueNameOld);
 					if (deleted == AssetsManager::ForgetBitmapResultEnum::ERROR_NOT_FOUND) {
 						auto debug = GameMain::getInstance()->getAssetsManager();

@@ -78,6 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\lib\x86;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\lib\x86;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_gfx-1.0.1\Win32\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -120,12 +121,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2-2.0.4\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\externLibs\visualCpp\SDL2_gfx-1.0.1;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\engineSDL\headers;D:\Devel\REPOS_GITHUB\engineSDL_2016\version2016.A\LudumDare35\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_gfx.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,19 +150,54 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\gameplayState.cpp" />
+    <ClCompile Include="src\gameScene.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mainScene.cpp" />
     <ClCompile Include="src\mySceneManager.cpp" />
+    <ClCompile Include="src\victoryScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\buttonGotoMainScene.h" />
+    <ClInclude Include="headers\buttonNewGame.h" />
+    <ClInclude Include="headers\buttonNextFragment.h" />
     <ClInclude Include="headers\buttonQuit.h" />
+    <ClInclude Include="headers\buttonRestartLevel.h" />
+    <ClInclude Include="headers\buttonShapeshift.h" />
+    <ClInclude Include="headers\gameplayState.h" />
+    <ClInclude Include="headers\gameScene.h" />
     <ClInclude Include="headers\mainScene.h" />
     <ClInclude Include="headers\mySceneManager.h" />
+    <ClInclude Include="headers\victoryScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\engineSDL\engineSDL.vcxproj">
       <Project>{25c63b02-ed12-4bf0-b8ae-0119de51893b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\game.json" />
+    <None Include="resources\level0.json" />
+    <None Include="resources\level1.json" />
+    <None Include="resources\level10.json" />
+    <None Include="resources\level11.json" />
+    <None Include="resources\level12.json" />
+    <None Include="resources\level13.json" />
+    <None Include="resources\level14.json" />
+    <None Include="resources\level15.json" />
+    <None Include="resources\level16.json" />
+    <None Include="resources\level17.json" />
+    <None Include="resources\level18.json" />
+    <None Include="resources\level19.json" />
+    <None Include="resources\level2.json" />
+    <None Include="resources\level3.json" />
+    <None Include="resources\level30.json" />
+    <None Include="resources\level4.json" />
+    <None Include="resources\level5.json" />
+    <None Include="resources\level6.json" />
+    <None Include="resources\level7.json" />
+    <None Include="resources\level8.json" />
+    <None Include="resources\level9.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

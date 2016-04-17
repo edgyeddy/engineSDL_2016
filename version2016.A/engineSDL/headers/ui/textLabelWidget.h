@@ -21,6 +21,7 @@ namespace vortex {
 		//! Must be implemented in derived class
 		virtual void _dispose() override;
 	public:
+		void setText(const std::string &text);
 		//! Constructor
 		TextLabelWidget(const std::string &text, const Color4 &textColor, const Color4 &backColor, const Rectangle &virtualRectangle) : BaseWidget(virtualRectangle) {
 			mTextColor = textColor; 

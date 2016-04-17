@@ -6,9 +6,9 @@ namespace vortex {
 	//! UI widget: A vertical widget container.
 	class VBoxWidget : public BoxWidget {
 	protected:
-		virtual Rectangle updateVirtualRectangle(const Rectangle &newItemVirtualRectangle) override {
+		virtual Rectangle updateVirtualRectangle(const Rectangle &newItemVirtualRectangle, int childNumber) override {
 			int p0 = 0;
-			if (getNumChildren() > 1) {
+			if (childNumber > 1) {
 				p0 = mPadding;
 			}
 			// Compute the position for the new item

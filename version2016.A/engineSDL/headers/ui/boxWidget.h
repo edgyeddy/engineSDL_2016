@@ -43,13 +43,13 @@ namespace vortex {
 		}
 	protected:
 		//! Returns the top-left position for this item
-		virtual Rectangle updateVirtualRectangle(const Rectangle &newItemVirtualRectangle) = 0;
+		virtual Rectangle updateVirtualRectangle(const Rectangle &newItemVirtualRectangle, int childNumber) = 0;
 		//! Updates the virtual and real position and size of the container and the last-added item.
-		void updateAllCoordinatesAfterAdding(BaseWidget *item) {
+		void updateAllCoordinatesAfterAdding(BaseWidget *item, int childNumber) {
 			Rectangle oldBoxVirtualSize = this->mVirtualRectangle;
 			// 1) Updates the virtual coordinates of box.w / box.h
 			Rectangle virtualItem = item->getVirtualRectangle();
-			Rectangle topLeftNext = updateVirtualRectangle(virtualItem);
+			Rectangle topLeftNext = updateVirtualRectangle(virtualItem, childNumber);
 			// 2) Updates the real coordinates of box.
 			this->computeRealCoordinates(0, 0);
 			// 3) Updates the virtual coordinates of item.x / item.y
@@ -61,12 +61,14 @@ namespace vortex {
 			// 5) The previous items do not change their position or size
 		}
 	public:
+		//! Update this widget and its children virtual and real positions as its virtual position has changed (it has moved)
+		void updateLayout(int screenWidth, int screenHeight);
 		//! Items are stacked Left/Up to Right/Down, with the top-left corner of the BoxWidget kept fixed; items are Left/Up aligned.
 		inline void addChild(BaseWidget *item) {
 			// Recompute parent size and position
 			// Recompute child size and position
 			mChildren.push_back(item);
-			updateAllCoordinatesAfterAdding(item);
+			updateAllCoordinatesAfterAdding(item, getNumChildren());
 			item->parentWidget = this;
 		}
 	public:

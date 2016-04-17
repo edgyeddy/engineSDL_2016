@@ -16,10 +16,10 @@ namespace vortex {
 		/// Checker
 		bool hasScene();
 		/// Loads (and gains ownership) of the given scene
-		Scene *loadScene(int sceneId);
+		Scene *loadScene(int sceneId, int sceneDataInt1);
 		/// Unloads the current scene
 		void unloadScene();
 	protected:
-		virtual Scene *_loadScene(int sceneId) { return nullptr;  } //!< Created a scene of the required type, must be redefined in derived class
+		virtual Scene *_loadScene(int sceneId, int sceneDataInt1) { return nullptr;  } //!< Created a scene of the required type, must be redefined in derived class
 	};
 }

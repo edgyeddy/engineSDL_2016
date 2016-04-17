@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL.h"
+#include "constants.h"
 #include <string>
 #include <sstream>
 namespace vortex {
@@ -42,14 +43,14 @@ namespace vortex {
 			if (ratioDst < ratioSrc) {
 				// Add left-right bars
 				out.Rect.h = area.Rect.h;
-				out.Rect.w = (int)(out.Rect.h * ratioDst);
+				out.Rect.w = (int)(round(out.Rect.h * ratioDst));
 				out.Rect.y = area.Rect.y;
 				out.Rect.x = area.Rect.x + (area.Rect.w - out.Rect.w) / 2;
 			}
 			else {
 				// Add top-down bars
 				out.Rect.w = area.Rect.w;
-				out.Rect.h = (int)(out.Rect.w / ratioDst);
+				out.Rect.h = (int)(round(out.Rect.w / ratioDst));
 				out.Rect.x = area.Rect.x;
 				out.Rect.y = area.Rect.y + (area.Rect.h - out.Rect.h) / 2;
 			}
@@ -64,14 +65,14 @@ namespace vortex {
 			if (ratioDst < ratioSrc) {
 				// Match target width, crop height
 				out.Rect.w = area.Rect.w;
-				out.Rect.h = (int)(out.Rect.w / ratioDst);
+				out.Rect.h = (int)(round(out.Rect.w / ratioDst));
 				out.Rect.x = area.Rect.x;
 				out.Rect.y = area.Rect.y + (area.Rect.h - out.Rect.h) / 2;
 			}
 			else {
 				// Match target height, crop width
 				out.Rect.h = area.Rect.h;
-				out.Rect.w = (int)(out.Rect.h * ratioDst);
+				out.Rect.w = (int)(round(out.Rect.h * ratioDst));
 				out.Rect.y = area.Rect.y;
 				out.Rect.x = area.Rect.x + (area.Rect.w - out.Rect.w) / 2;
 
@@ -113,12 +114,16 @@ namespace vortex {
 			// Map self virtual coordinates to real target coordinates
 			float scaleX = (float)realTarget.Rect.w / (float)virtualWidth;
 			float scaleY = (float)realTarget.Rect.h / (float)virtualHeight;
-			real.Rect.w = (int)(this->Rect.w * scaleX);
-			real.Rect.h = (int)(this->Rect.h * scaleY);
-			real.Rect.x = realTarget.Rect.x + (int)(this->Rect.x * scaleX);
-			real.Rect.y = realTarget.Rect.y + (int)(this->Rect.y * scaleY);
+			real.Rect.w = (int)(round(this->Rect.w * scaleX));
+			real.Rect.h = (int)(round(this->Rect.h * scaleY));
+			real.Rect.x = realTarget.Rect.x + (int)(round(this->Rect.x * scaleX));
+			real.Rect.y = realTarget.Rect.y + (int)(round(this->Rect.y * scaleY));
+			// Adjust to next even value
 
 			return real;
+		}
+		static Rectangle getVirtualWorld() {
+			return Rectangle(Constants::VIRTUAL_WIDTH, Constants::VIRTUAL_HEIGHT, 0, 0);
 		}
 	};
 }

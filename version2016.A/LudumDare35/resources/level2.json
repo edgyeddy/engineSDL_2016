@@ -1,0 +1,61 @@
+{
+  "float": [
+    {
+      "symbols": [
+        1,
+        2,
+        3
+      ]
+    }
+	],
+  "fixed": [
+  { "col": 0, "symbols" :  [ 10 ]},
+	{ "col": 1, "symbols" :  [ 10 ]},
+	{ "col": 2, "symbols" :  [ 10 ]},
+	{ "col": 3, "symbols" :  [  ]},
+    {
+      "col": 4,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 5,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 6,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 8,
+      "symbols": [ 1, 2, 3 ]
+    },
+	{ "col": 9, "symbols" :  [ 10 ]}
+  ],
+  "solution": [
+  { "col": 0, "symbols" :  [ 10 ]},
+	{ "col": 1, "symbols" :  [ 10 ]},
+	{ "col": 2, "symbols" :  [ 10 ]},
+	{ "col": 3, "symbols" :  [  ]},
+    {
+      "col": 4,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 5,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 6,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 7,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 8,
+      "symbols": [ 1, 2, 3 ]
+    },
+	{ "col": 9, "symbols" :  [ 10 ]}
+  ]
+}

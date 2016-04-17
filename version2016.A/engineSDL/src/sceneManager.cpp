@@ -17,11 +17,11 @@ namespace vortex {
 		if (mCurrentScene == nullptr) { throw Exception("Current scene is NULL"); }
 		return mCurrentScene;
 	}
-	Scene *SceneManager::loadScene(int sceneType) {
+	Scene *SceneManager::loadScene(int sceneType, int sceneDataInt1) {
 		// Unload previous scene
 		unloadScene();
 		// Load new scene
-		mCurrentScene = _loadScene(sceneType);
+		mCurrentScene = _loadScene(sceneType, sceneDataInt1);
 		if (mCurrentScene == nullptr) {
 			throw Exception("Scene is NULL");
 		}

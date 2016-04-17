@@ -10,8 +10,10 @@ namespace vortex {
 	public:
 		/// Some of the specific user events this engine can parse.
 		enum EventTypeEnum {
+			EVENT_1_SECOND,
 			EVENT_PRINT_FPS,
 			EVENT_REFRESH_SCREEN,
+			EVENT_CHANGE_SCENE,
 			USER_EVENTS_BASE_INDEX = 1000,
 		};
 	public:
@@ -52,12 +54,14 @@ namespace vortex {
 	protected:
 		static GameMain *sInstance; //!< Single static instance of the game engine.
 	protected:
+		bool mLockUI = false;
 		MainWindowConfig mInitialWindowConfig; //!< Stores the requested initial window configuration
 		int mTimestampLastUpdateMs = -1; //!< Timestamp of the last update event
 		int mTimestampMsLastFPS; //!< Timestamp of the last FPS string computation.
 		int mNumFramesRendered; //!< Counts the number of frames drawn.
 		std::string mFpsString; //!< Cached FPS string text
 		SDL_TimerID mTimerFPS; //!< Timer ID to the FPS timer (needed to cancel it).
+		SDL_TimerID mTimerSecond; //!< Timer ID to the 1 Hz timer (needed to cancel it).
 		SDL_Window* mWindow; //!< Pointer to the single window of this program
 		//@ADD-NEW-MANAGERS-HERE
 		AssetsManager *mAssetsManager;  //!< Pointer to the owned assets manager.
@@ -77,6 +81,11 @@ namespace vortex {
 		inline MainWindowConfig &getMainWindowConfigRef() {
 			return mInitialWindowConfig;
 		}
+		//! Setter
+		inline void lockUI(bool lockUI) {
+			mLockUI = lockUI;
+		}
+		
 	protected:
 		void _initialize() override;
 		void _dispose() override;
@@ -95,9 +104,13 @@ namespace vortex {
 	public:
 		void setSceneManager(SceneManager *sceneManager); //!< Transfers ownership of this SceneManager instance to GameMain.
 		void mainLoop(); //!< Main event loop (indefinite)
-		void loadScene(int sceneId); //!< Loads the given scene
+		void loadScene(int sceneId, int sceneDataInt1); //!< Loads the given scene
 		//! Getter
 		Rectangle getWindowSize();
+		//! Getter
+		inline SDL_Window *getWindow() {
+			return mWindow;
+		}
 	protected:
 		void onTimeUpdate(); //!< Informs the current scene to perform a time update
 		void onDraw(); //!< Redraws the main window, according to the current scene

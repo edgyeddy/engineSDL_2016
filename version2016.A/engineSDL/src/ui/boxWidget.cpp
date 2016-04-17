@@ -88,4 +88,21 @@ namespace vortex {
 			child->resize(windowOldSize, width, height);
 		}
 	}
+	void BoxWidget::updateLayout(int screenWidth, int screenHeight) {
+		Rectangle selfBefore = this->getVirtualRectangle();
+		// Reset container size
+		selfBefore.Rect.w = 0;
+		selfBefore.Rect.h = 0;
+		mVirtualRectangle = selfBefore;
+		// For each children, move to position
+		int num = this->getNumChildren();
+		for (int ii = 0; ii < num; ii++) {
+			BaseWidget *child = this->getChildAt(ii);
+			this->updateAllCoordinatesAfterAdding(child, ii + 1);
+			// TODO: Update layout for children
+		}
+		Rectangle selfAfter = selfBefore;
+		this->setVirtualRectangle(selfAfter);
+		this->computeRealCoordinates(screenWidth, screenHeight);
+	}
 }

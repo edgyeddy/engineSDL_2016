@@ -1,0 +1,8 @@
+{
+  "enableDebug" :  false,
+  "numLevels": 20,
+  "numRows": 6,
+  "numColumns": 10,
+  "numSymbols": 11,
+  "debugStartingLevel": 19
+}

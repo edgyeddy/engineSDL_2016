@@ -1,0 +1,96 @@
+{
+	"float": [{
+		"symbols": [
+			9,
+			1
+			
+		]
+	},
+	{
+		"symbols": [
+			2,
+			9
+	]}],
+  "fixed": [
+     {
+      "col": 0,
+      "symbols": [ 9, 1, 9 ]
+    },
+    {
+      "col": 1,
+      "symbols": [ 9, 1, 9]
+    },
+    {
+      "col": 2,
+      "symbols": [ 1, 1, 1 ]
+    }
+	,
+    {
+      "col": 3,
+      "symbols": [ 9 ]
+    }
+	,
+    {
+      "col": 4,
+      "symbols": [ 9 ]
+    }
+	,
+    {
+      "col": 5,
+      "symbols": [ 2,2,2 ]
+    }
+	,
+    {
+      "col": 6,
+      "symbols": [ 9,2,9 ]
+    }
+	,
+    {
+      "col": 7,
+      "symbols": [ 9,2,9 ]
+    },{"col":8, "symbols":[10]},
+  {"col":9, "symbols":[10]}
+  
+  ],
+  "solution": [
+    {
+      "col": 0,
+      "symbols": [ 9, 1, 9 ]
+    },
+    {
+      "col": 1,
+      "symbols": [ 9, 1, 9]
+    },
+    {
+      "col": 2,
+      "symbols": [ 1, 1, 1 ]
+    }
+	,
+    {
+      "col": 3,
+      "symbols": [ 9, 1, 9 ]
+    }
+	,
+    {
+      "col": 4,
+      "symbols": [ 9,2,9 ]
+    }
+	,
+    {
+      "col": 5,
+      "symbols": [ 2,2,2 ]
+    }
+	,
+    {
+      "col": 6,
+      "symbols": [ 9,2,9 ]
+    }
+	,
+    {
+      "col": 7,
+      "symbols": [ 9,2,9 ]
+    }
+	,{"col":8, "symbols":[10]},
+  {"col":9, "symbols":[10]}
+  ]
+}

@@ -10,7 +10,7 @@
 int main(int argc, char* args[])
 {
 	try {
-		vortex::Logger::d(TR("Program starts..."));
+		vortex::Logger::t(TR("Program starts..."));
 		// Get (create) a game main instance
 		vortex::GameMain *master = vortex::GameMain::getInstance();
 		// Create and add a custom scene manager
@@ -21,7 +21,7 @@ int main(int argc, char* args[])
 		// Prepare a SDL window and perform other initialization duties.
 		master->initialize();
 		// Load initial scene
-		master->loadScene(vortex::MySceneManager::SceneTypeEnum::DEMO_SCENE);
+		master->loadScene(vortex::MySceneManager::SceneTypeEnum::DEMO_SCENE, 0);
 		// Execute main event loop	
 		master->mainLoop();
 		// Release SDL resources and all disposable objects.
@@ -41,11 +41,11 @@ int main(int argc, char* args[])
 	}
 
 	if (vortex::Constants::DEBUG_ENABLE) {
-		vortex::Logger::d(TR("Quitting after 3 seconds."));
+		vortex::Logger::t(TR("Quitting after 3 seconds."));
 		vortex::ThreadUtils::sleepThisThreadSeconds(3);
 	}
 	else {
-		vortex::Logger::d(TR("Done."));
+		vortex::Logger::t(TR("Done."));
 	}
 	return 0;
 }

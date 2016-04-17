@@ -1,0 +1,52 @@
+{
+	"float": [
+	{ "symbols": [0,1,0 ]},
+	{ "symbols": [0,2,1 ]},
+	{ "symbols": [ 1,1,2 ]},
+	{ "symbols": [ 1,0,1 ]}
+	],
+  "fixed": [
+    { "col": 0,
+      "symbols": [ 10 ]},
+    { "col": 1,
+      "symbols": [0,0,0,0,0,0]},
+    { "col": 2,
+      "symbols": [0,0,1]},
+    { "col": 3,
+      "symbols": [0,0,2]},
+    { "col": 4,
+      "symbols": [0,0,1,2,2,1]},
+    { "col": 5,
+      "symbols": [0,1,2]},
+	{ "col" :6,
+	  "symbols" : [0,1,2,2,2,1]},
+	{ "col" :7,
+	  "symbols" : [0,0,1]},
+	{ "col" :8,
+	  "symbols" : [0,0,0,0,0,0]},
+	{ "col" :9,
+	  "symbols" : [10]}
+  ],
+  "solution": [
+    { "col": 0,
+      "symbols": [ 10 ]},
+    { "col": 1,
+      "symbols": [0,0,0,0,0,0]},
+    { "col": 2,
+      "symbols": [0,0,1,1,0,0]},
+    { "col": 3,
+      "symbols": [0,0,2,2,1,0]},
+    { "col": 4,
+      "symbols": [0,0,1,2,2,1]},
+    { "col": 5,
+      "symbols": [0,1,2,1,2,1]},
+	{ "col" :6,
+	  "symbols" : [0,1,2,2,2,1]},
+	{ "col" :7,
+	  "symbols" : [0,0,1,1,1,0]},
+	{ "col" :8,
+	  "symbols" : [0,0,0,0,0,0]},
+	{ "col" :9,
+	  "symbols" : [10]}
+  ]
+}

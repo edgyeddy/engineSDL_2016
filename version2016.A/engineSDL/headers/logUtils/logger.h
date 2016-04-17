@@ -16,6 +16,8 @@ namespace vortex {
 	/// Logs messages to std::cout
 	class Logger {
 	public:
+		//! Prints a text to std::cout
+		static void t(std::string msg);
 		//! Prints a debug text to std::cout
 		static void d(std::string msg);
 		//! Prints a warning text to std::cout

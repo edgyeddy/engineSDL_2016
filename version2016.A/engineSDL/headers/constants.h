@@ -17,6 +17,7 @@ namespace vortex {
 
 		static const char *DEFAULT_FONT_PATH; //!< Default font path
 		static const int DEFAULT_FONT_SIZE = 20; //!< Default font size
+		static const int LARGE_FONT_SIZE = 80; //!< Default font size
 
 	public:
 		//! Default width of the UI interface
@@ -25,7 +26,7 @@ namespace vortex {
 		static const int VIRTUAL_HEIGHT = 6000;
 
 		// @PRODUCTION false
-		static const bool DEBUG_ENABLE = true; //!< To enable debug code 
+		static bool DEBUG_ENABLE; //!< To enable debug code 
 		// @PRODUCTION false
 		static const bool DEBUG_VERBOSE = true; //!< To enable verbose debug code. Requires DEBUG_ENABLE set. 
 	};

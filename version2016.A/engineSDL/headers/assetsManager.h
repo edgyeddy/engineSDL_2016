@@ -45,5 +45,24 @@ namespace vortex {
 		void addBitmapReferenceFromMemory(std::string &uniqueName, SDL_Surface *memorySurface, const std::string &debugName);
 		//! Informs the AssetsManager that the object doesn't need to reference this texture.
 		ForgetBitmapResultEnum forgetBitmapReference(std::string &uniqueName);
+		//! Informs the AssetsManager that the object doesn't need to reference this texture.
+		inline ForgetBitmapResultEnum forgetBitmapReference(SDL_Surface *surface) {
+			if (surface == nullptr) {
+				return ForgetBitmapResultEnum::ERROR_NOT_FOUND;
+			}
+			return forgetBitmapReference(surface, surface->w, surface->h);
+		}
+		inline ForgetBitmapResultEnum forgetBitmapReference(SDL_Surface *surface, int width, int height) {
+			if (surface == nullptr) {
+				return ForgetBitmapResultEnum::ERROR_NOT_FOUND;
+			}
+			std::string uniqueName = generateUniqueName(surface, width, height);
+			return forgetBitmapReference(uniqueName);
+		}
+		inline static std::string generateUniqueName(void *surface, int width, int height) {
+			std::ostringstream oss;
+			oss << surface << "#" << width << "#" << height;
+			return oss.str();
+		}
 	};
 }

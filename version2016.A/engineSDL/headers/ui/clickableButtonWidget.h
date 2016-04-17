@@ -15,6 +15,9 @@ namespace vortex {
 		bool mIsPressed = false; //!< Mouse cursor was above the button when a l-click down event was produced.
 		bool mIsHover = false; //!< Mouse cursor is above the button.
 	public:
+		inline static ClickableButtonWidget *createAsImageWidget(const std::string &image, int width, int height) {
+			return new ClickableButtonWidget("", image, image, Color4::getColor4(0, 0, 0), Rectangle(width, height));
+		}
 		//! Setter
 		inline void setPressed(bool value) {
 			mIsPressed = value;

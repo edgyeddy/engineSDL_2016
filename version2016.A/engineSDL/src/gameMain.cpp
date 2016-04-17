@@ -9,7 +9,7 @@ namespace vortex {
 	GameMain *GameMain::sInstance = nullptr;
 
 	void GameMain::_initialize() {
-		vortex::Logger::d(TR("Starting the program..."));
+		vortex::Logger::t(TR("Starting the program..."));
 
 		// The surface contained by the window
 		SDL_Surface* screenSurface = nullptr;
@@ -62,6 +62,7 @@ namespace vortex {
 		// @ADD-NEW-MANAGERS-HERE
 
 		mTimerFPS = this->launchUserEventAfterDelay(Constants::DELAY_PRINT_FPS_MS, EventTypeEnum::EVENT_PRINT_FPS, 0, 0, true);
+		mTimerSecond = this->launchUserEventAfterDelay(1000, EventTypeEnum::EVENT_1_SECOND, 0, 0, true);
 	}
 	void GameMain::setSceneManager(SceneManager *sceneManager) {
 		if (mSceneManager != nullptr) {
@@ -70,12 +71,12 @@ namespace vortex {
 		mSceneManager = sceneManager;
 		// NOTE: The scene is not initialized yet
 	}
-	void GameMain::loadScene(int sceneType) {
-		mSceneManager->loadScene(sceneType);
+	void GameMain::loadScene(int sceneType, int sceneDataInt1) {
+		mSceneManager->loadScene(sceneType, sceneDataInt1);
 	}
 
 	void GameMain::_dispose() {
-		vortex::Logger::d(TR("Closing the program..."));
+		vortex::Logger::t(TR("Closing the program..."));
 
 		// Release objects
 		mSceneManager = static_cast<SceneManager*>(DELETE_OBJECT(mSceneManager));
@@ -85,6 +86,7 @@ namespace vortex {
 
 		// Delete timer
 		SDL_bool ok = SDL_RemoveTimer(mTimerFPS);
+		ok = SDL_RemoveTimer(mTimerSecond);
 		// Wait Xs (debug)
 		SDL_Delay(0);
 		// Destroy main window
@@ -131,7 +133,7 @@ namespace vortex {
 		this->onDraw();
 
 		//Main loop flag 
-		vortex::Logger::d(TR("Starting event loop."));
+		vortex::Logger::t(TR("Starting event loop."));
 
 		Uint32 windowID = SDL_GetWindowID(mWindow);
 		bool quit = false;
@@ -146,7 +148,7 @@ namespace vortex {
 					if (ev.user.code == EventTypeEnum::EVENT_PRINT_FPS) {
 						computeFpsString();
 						Logger::d(getFpsString());
-						// NOTE: UserEventData for repeat event SHOULD NOT be released.
+						// NOTE: UserEventData for repeat event SHOULD NOT be released (reused).
 					}
 					else if (ev.user.code == EventTypeEnum::EVENT_REFRESH_SCREEN) {
 						delete data;
@@ -155,21 +157,31 @@ namespace vortex {
 						this->onResize(rect.Rect.w, rect.Rect.h); // screenSurface->w, screenSurface->h);
 						this->onDraw();
 					}
-					/*
 					//void(*p) (void*) = ev.user.data1;
 					//p(event.user.data2);
-					if (ev.user.code == UserEventData::EVENT_CHANGE_TO_NEXT_SCREEN) {
+					else if (ev.user.code == EventTypeEnum::EVENT_CHANGE_SCENE) {
 						UserEventData *data = (UserEventData*)ev.user.data1;
-						mSceneManager->loadScene((SceneManager::SceneType)data->data1);
-						this->onResize(screenSurface->w, screenSurface->h);
+						mSceneManager->loadScene((int)data->data1, (int)data->data2);
+						// Prepare to display new scene
+						Rectangle rect = this->getWindowSize();
+						this->onResize(rect.Rect.w, rect.Rect.h); // screenSurface->w, screenSurface->h);
 						this->onDraw();
+						// Release user event data
 						delete data;
 						data = nullptr;
 					}
-					else  */
+						
+					else if (ev.user.code == EventTypeEnum::EVENT_1_SECOND) {
+						// NOTE: UserEventData for repeat event SHOULD NOT be released (reused).
+						if (mSceneManager->hasScene()) {
+							mSceneManager->getCurrentScene()->onUserEvent(data);
+						}
+					}
 					else {
 						// Send the unkown user event to the scene for processing
-						mSceneManager->getCurrentScene()->onUserEvent(data);
+						if (mSceneManager->hasScene()) {
+							mSceneManager->getCurrentScene()->onUserEvent(data);
+						}
 						delete data;
 						data = nullptr;
 					}
@@ -201,17 +213,19 @@ namespace vortex {
 					break;
 				} // case
 				case SDL_KEYUP: {
-					// TODO mGameState->updateKeyState(ev.key.keysym.scancode, false);
+					//TODO mGameState->updateKeyState(ev.key.keysym.scancode, false);
 					break;
 				}
 
 				case SDL_KEYDOWN: {
 					if (ev.key.keysym.sym == SDLK_ESCAPE) {
-						vortex::Logger::d(TR("Processing <ESC> keydown event."));
+						vortex::Logger::t(TR("Processing <ESC> keydown event."));
 						quit = true;
 					}
-					// TODO mGameState->updateKeyState(ev.key.keysym.scancode, true);
-					// TODO mSceneManager->getCurrentScene()->onKeyPressedEvent(ev.key.keysym.scancode);
+					//TODO mGameState->updateKeyState(ev.key.keysym.scancode, true);
+					if (!mLockUI) {
+						mSceneManager->getCurrentScene()->onKeyPressedEvent(SDL_GetKeyFromScancode((SDL_Scancode)ev.key.keysym.scancode));
+					}
 
 					break;
 				} // case
@@ -222,16 +236,20 @@ namespace vortex {
 				}
 				case SDL_MOUSEBUTTONUP:
 				{
-					mSceneManager->getCurrentScene()->onMouseClickUpEvent(ev.button);
+					if (!mLockUI) {
+						mSceneManager->getCurrentScene()->onMouseClickUpEvent(ev.button);
+					}
 					break;
 				}
 				case SDL_MOUSEBUTTONDOWN:
 				{
-					mSceneManager->getCurrentScene()->onMouseClickDownEvent(ev.button);
+					if (!mLockUI) {
+						mSceneManager->getCurrentScene()->onMouseClickDownEvent(ev.button);
+					}
 					break;
 				}
 				case SDL_QUIT: {
-					vortex::Logger::d(TR("Processing QUIT event."));
+					vortex::Logger::t(TR("Processing QUIT event."));
 					quit = true;
 					break;
 				} // case

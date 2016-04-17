@@ -10,18 +10,19 @@
 int main(int argc, char* args[])
 {
 	try {
-		vortex::Logger::d(TR("Program starts..."));
+		vortex::Logger::t(TR("Program starts..."));
 		// Get (create) a game main instance
 		vortex::GameMain *master = vortex::GameMain::getInstance();
 		// Create and add a custom scene manager
 		master->setSceneManager(new vortex::MySceneManager());
 		// Configure custom icon
 		master->getMainWindowConfigRef().iconPath = "resources/window_icon32.bmp";
-		master->getMainWindowConfigRef().screenTitle = TR("LudumDare 35 (edgyeddy 2016-04-1X)");
+		master->getMainWindowConfigRef().screenTitle = TR("LudumDare 35 Shapeshift");
 		// Prepare a SDL window and perform other initialization duties.
 		master->initialize();
 		// Load initial scene
-		master->loadScene(vortex::MySceneManager::SceneTypeEnum::MAIN_SCENE);
+		master->loadScene(vortex::MySceneManager::SceneTypeEnum::MAIN_SCENE, 0);
+		//master->loadScene(vortex::MySceneManager::SceneTypeEnum::VICTORY_SCENE, 123);
 		// Execute main event loop	
 		master->mainLoop();
 		// Release SDL resources and all disposable objects.
@@ -41,11 +42,11 @@ int main(int argc, char* args[])
 	}
 
 	if (vortex::Constants::DEBUG_ENABLE) {
-		vortex::Logger::d(TR("Quitting after 3 seconds."));
+		vortex::Logger::t(TR("Quitting after 3 seconds."));
 		vortex::ThreadUtils::sleepThisThreadSeconds(3);
 	}
 	else {
-		vortex::Logger::d(TR("Done."));
+		vortex::Logger::t(TR("Done."));
 	}
 	return 0;
 }

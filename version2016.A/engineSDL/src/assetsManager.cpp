@@ -80,7 +80,7 @@ namespace vortex {
 		}
 		else {
 			// Not found
-			Logger::w(std::string("getBitmapReferenceFromMemory() : Not found memory bitmap named ") + uniqueName);
+			Logger::d(std::string("getBitmapReferenceFromMemory() : Not found memory bitmap named ") + uniqueName);
 			return nullptr;
 		}
 	}

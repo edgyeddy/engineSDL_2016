@@ -1,0 +1,52 @@
+{
+  "float": [
+    {
+      "symbols": [
+        3,
+        1,
+        2
+      ]
+    }
+	],
+  "fixed": [
+    {
+      "col": 4,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 5,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 6,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 8,
+      "symbols": [ 1, 2, 3 ]
+    }
+  ],
+  "solution": [
+  
+    {
+      "col": 4,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 5,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 6,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 7,
+      "symbols": [ 1, 2, 3 ]
+    },
+    {
+      "col": 8,
+      "symbols": [ 1, 2, 3 ]
+    }
+  ]
+}
